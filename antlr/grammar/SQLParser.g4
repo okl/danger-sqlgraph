@@ -24,6 +24,7 @@ options {
 }
 
 @header {
+package okl.sqlgraph;
 }
 
 @members {

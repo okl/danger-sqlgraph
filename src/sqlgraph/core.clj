@@ -1,25 +1,39 @@
 (ns sqlgraph.core
   (:import [org.antlr.v4.runtime ANTLRFileStream]
            [org.antlr.v4.runtime
-            ANTLRInputStream CommonTokenStream CharStream]
+            ANTLRInputStream
+            CommonTokenStream
+            CharStream]
            [org.antlr.v4.runtime.tree
-            ParseTree ParseTreeWalker]))
+            ParseTree ParseTreeWalker])
+  (:import [okl.sqlgraph
+            SQLLexer
+            SQLParser
+            SQLParser$Select_listContext
+            SQLParser$SqlContext
+            SQLParserBaseListener
+            SQLHelloListener]))
 
-(def sql-stmt "Select * from yourmom")
+(def sql-stmt "SELECT * FROM YOURMOM;")
 
+(def words (atom ""))
 
+(defn make-listener []
+  (proxy [okl.sqlgraph.SQLParserBaseListener] []
+    (enterSql [^SQLParser$SqlContext ctx]
+      (swap! words (fn [w] (str w "hello!"))))
+    (exitSql [^SQLParser$SqlContext ctx]
+      (swap! words #(str % "bye!")))))
 
-(.ready sql-reader)
-(.close sql-reader)
-(let [foo (ANTLRInputStream. sql-stmt)]
-  (SQLLexer. foo))
+(defn parse-expr [s]
+  (let [lexer (SQLLexer. (ANTLRInputStream. s))
+        tokens (CommonTokenStream. lexer)
+        parser (SQLParser. tokens)
+        ctx  (.sql parser)
+        walker (ParseTreeWalker.)
+        my-listener (make-listener)]
+    (.walk walker my-listener ctx)
+    my-listener))
 
-(instance? CharStream (ANTLRInputStream. sql-stmt) )
-
-
-
-
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+;; (.getWords (parse-expr sql-stmt))
+ (parse-expr sql-stmt)

@@ -19,6 +19,7 @@
 lexer grammar SQLLexer;
 
 @header {
+package okl.sqlgraph;
 }
 
 @members {
