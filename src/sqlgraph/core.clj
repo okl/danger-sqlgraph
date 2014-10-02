@@ -11,8 +11,7 @@
             SQLParser
             SQLParser$Select_listContext
             SQLParser$SqlContext
-            SQLParserBaseListener
-            SQLHelloListener]))
+            SQLParserBaseListener]))
 
 (def sql-stmt "SELECT * FROM YOURMOM;")
 
@@ -20,10 +19,10 @@
 
 (defn make-listener []
   (proxy [okl.sqlgraph.SQLParserBaseListener] []
-    (enterSql [^SQLParser$SqlContext ctx]
-      (swap! words (fn [w] (str w "hello!"))))
-    (exitSql [^SQLParser$SqlContext ctx]
-      (swap! words #(str % "bye!")))))
+    (enterTable_name [^SQLParser$SqlContext ctx]
+      (swap! words #(str % "<TNAME>" (.getText ctx))))
+    (exitTable_name [^SQLParser$SqlContext ctx]
+      (swap! words #(str % "</TNAME>")))))
 
 (defn parse-expr [s]
   (let [lexer (SQLLexer. (ANTLRInputStream. s))
