@@ -13,8 +13,6 @@
             SQLParser$SqlContext
             SQLParserBaseListener]))
 
-(def sql-stmt "CREATE TABLE IQ.TEST AS SELECT * FROM SCHEMA.YOURMOM Q LEFT JOIN SCHEMA.MYMOM T ON Q.FY = T.FY;")
-
 (def results (atom {:produces [] :consumes []}))
 (def state (atom nil))
 
@@ -59,8 +57,4 @@
         ctx  (.sql parser)
         walker (ParseTreeWalker.)
         my-listener (make-listener)]
-    (.walk walker my-listener ctx)
-    my-listener))
-
-;; (.getWords (parse-expr sql-stmt))
- (parse-expr sql-stmt)
+    (.walk walker my-listener ctx)))
