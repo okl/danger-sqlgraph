@@ -17,8 +17,9 @@
 (def state (atom nil))
 
 (defn add-table [table-name]
-  (let [mode (if (= "query" (first @state)) :consumes :produces)]
-    (swap! results #(assoc % mode (conj (mode %) table-name)))))
+  (let [mode (if (= "query" (first @state)) :consumes :produces)
+        lower-table (lower-case table-name)]
+    (swap! results #(assoc % mode (conj (mode %) lower-table)))))
 
 (defn enter-state [new-state]
   (swap! state #(conj % new-state)))
