@@ -38,6 +38,10 @@
       (enter-state "query"))
     (exitQuery_expression [^SQLParser$SqlContext ctx]
       (exit-state "query"))
+    (enterInsert_statement [^SQLParser$SqlContext ctx]
+      (enter-state "insert"))
+    (exitInsert_statement [^SQLParser$SqlContext ctx]
+      (exit-state "insert"))
     (enterTable_name [^SQLParser$SqlContext ctx]
       (add-table (.getText ctx)))))
 
