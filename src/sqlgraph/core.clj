@@ -29,6 +29,8 @@
   (swap! state #(rest %)))
 
 (defn make-listener []
+  (swap! results (fn [a] (hash-map)))
+  (swap! state (fn [a] nil))
   (proxy [okl.sqlgraph.SQLParserBaseListener] []
     (enterCreate_table_statement [^SQLParser$SqlContext ctx]
       (enter-state "create"))
