@@ -17,7 +17,7 @@
 (def results (atom {:produces [] :consumes []}))
 (def state (atom nil))
 
-(defn add-table [table-name]
+(defn- add-table [table-name]
   (let [mode (case (first @state)
                "query" :consumes
                "insert" :consumes
@@ -27,10 +27,10 @@
         lower-table (lower-case table-name)]
     (swap! results #(assoc % mode (conj (mode %) lower-table)))))
 
-(defn enter-state [new-state]
+(defn- enter-state [new-state]
   (swap! state #(conj % new-state)))
 
-(defn exit-state [exit-state]
+(defn- exit-state [exit-state]
   (let [current-state (first @state)]
     (if (= current-state exit-state)
       (swap! state #(rest %))
@@ -38,7 +38,7 @@
               (str "Can't pop " exit-state " from " @state))))))
 
 
-(defn make-listener []
+(defn- make-listener []
   (swap! results (fn [a] {:produces [] :consumes []}))
   (swap! state (fn [a] nil))
   (proxy [okl.sqlgraph.SQLParserBaseListener] []
