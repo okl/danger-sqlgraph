@@ -22,20 +22,22 @@
   (let [mode (if (= "query" (first @state)) :consumes :produces)]
     (swap! results #(assoc % mode (conj (mode %) table-name)))))
 
+(defn enter-state [new-state]
+  (swap! state #(conj % new-state)))
+
+(defn exit-state [exit-state]
+  (swap! state #(rest %)))
+
 (defn make-listener []
   (proxy [okl.sqlgraph.SQLParserBaseListener] []
     (enterCreate_table_statement [^SQLParser$SqlContext ctx]
-      (swap! state #(conj % "create"))
-      (println state))
+      (enter-state "create"))
     (exitCreate_table_statement [^SQLParser$SqlContext ctx]
-      (swap! state #(rest %))
-      (println state))
+      (exit-state "create"))
     (enterQuery_expression [^SQLParser$SqlContext ctx]
-      (swap! state #(conj % "query"))
-      (println state))
+      (enter-state "query"))
     (exitQuery_expression [^SQLParser$SqlContext ctx]
-      (swap! state #(rest %))
-      (println state))
+      (exit-state "query"))
     (enterTable_name [^SQLParser$SqlContext ctx]
       (add-table (.getText ctx)))))
 
