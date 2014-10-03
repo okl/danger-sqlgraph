@@ -1,7 +1,9 @@
 (ns sqlgraph.core-test
-  (:use clojure.test
-        sqlgraph.core))
+  (:require [clojure.test :refer :all]
+            [sqlgraph.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest select-parse-test
+  (is (= (parse-expr "SELECT * from MY_TABLE")
+         {:produces [] :consumes ["my_table"]}))
+  (is (= (parse-expr "select * from my_table")
+         {:produces [] :consumes ["my_table"]})))
