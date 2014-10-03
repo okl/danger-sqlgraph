@@ -1,4 +1,5 @@
 (ns sqlgraph.core
+  (:require [clojure.string :refer [lower-case]])
   (:import [org.antlr.v4.runtime ANTLRFileStream]
            [org.antlr.v4.runtime
             ANTLRInputStream
@@ -17,7 +18,12 @@
 (def state (atom nil))
 
 (defn add-table [table-name]
-  (let [mode (if (= "query" (first @state)) :consumes :produces)
+  (let [mode (case (first @state)
+               "query" :consumes
+               "insert" :consumes
+               "create" :produces
+               (throw (IllegalStateException.
+                       (str "Unknown state " (first @state)))))
         lower-table (lower-case table-name)]
     (swap! results #(assoc % mode (conj (mode %) lower-table)))))
 
