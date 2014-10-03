@@ -57,4 +57,5 @@
         ctx  (.sql parser)
         walker (ParseTreeWalker.)
         my-listener (make-listener)]
-    (.walk walker my-listener ctx)))
+    (.walk walker my-listener ctx)
+    @results))
