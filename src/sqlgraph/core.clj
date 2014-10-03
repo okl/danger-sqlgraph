@@ -26,7 +26,12 @@
   (swap! state #(conj % new-state)))
 
 (defn exit-state [exit-state]
-  (swap! state #(rest %)))
+  (let [current-state (first @state)]
+    (if (= current-state exit-state)
+      (swap! state #(rest %))
+      (throw (IllegalStateException.
+              (str "Can't pop " exit-state " from " @state))))))
+
 
 (defn make-listener []
   (swap! results (fn [a] (hash-map)))
