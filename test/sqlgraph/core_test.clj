@@ -23,3 +23,9 @@
          {:produces [] :consumes [] :destroys ["myschema.mytable"]}))
   (is (= (parse-expr "drop table if exists myschema.mytable")
          {:produces [] :consumes [] :destroys ["myschema.mytable"]})))
+
+(deftest update-parse-test
+  (is (= (parse-expr "update analytics.yoda y set y.id = y.blah")
+         {:produces [] :consumes ["analytics.yoda"] :destroys []}))
+  (is (= (parse-expr "update analytics.yoda y, foo.bar f set y.thingy = f.thingy where f.id = y.id")
+         {:produces [] :consumes ["analytics.yoda" "foo.bar"] :destroys []})))

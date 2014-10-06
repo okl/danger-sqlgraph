@@ -52,6 +52,7 @@ data_statement
 
 data_change_statement
   : insert_statement
+  | update_statement
   ;
 
 schema_statement
@@ -1347,4 +1348,15 @@ null_ordering
 insert_statement
   : INSERT (OVERWRITE)? INTO table_name (LEFT_PAREN column_name_list RIGHT_PAREN)? query_expression
   | INSERT (OVERWRITE)? INTO LOCATION path=Character_String_Literal (USING file_type=identifier (param_clause)?)? query_expression
+  ;
+
+/*
+===============================================================================
+  15: Custom functions
+  15.1 <update statement>
+===============================================================================
+*/
+
+update_statement
+  : UPDATE table_reference_list SET search_condition (where_clause)?
   ;

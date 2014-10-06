@@ -178,6 +178,7 @@ TRUE : T R U E;
 
 UNION : U N I O N;
 UNIQUE : U N I Q U E;
+UPDATE : U P D A T E;
 USING : U S I N G;
 
 WHEN : W H E N;
