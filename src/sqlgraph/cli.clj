@@ -24,7 +24,7 @@
 
 (defn- process-file [file-contents]
   "Process each statement of the file separately"
-  (doall (map process-stmt (string/split file-contents #";"))))
+  (doall (map process-stmt (butlast (string/split file-contents #";")))))
 
 (defn -main [& args]
   (let [opts-out (parse-opts args cli-opts)]
