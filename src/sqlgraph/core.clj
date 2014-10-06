@@ -4,9 +4,12 @@
            [org.antlr.v4.runtime
             ANTLRInputStream
             CommonTokenStream
-            CharStream]
+            CharStream
+            BailErrorStrategy]
            [org.antlr.v4.runtime.tree
-            ParseTree ParseTreeWalker])
+            ParseTree ParseTreeWalker]
+           [org.antlr.v4.runtime.misc
+            ParseCancellationException])
   (:import [okl.sqlgraph
             SQLLexer
             SQLParser
@@ -58,11 +61,15 @@
       (add-table (.getText ctx)))))
 
 (defn parse-expr [s]
-  (let [lexer (SQLLexer. (ANTLRInputStream. s))
-        tokens (CommonTokenStream. lexer)
-        parser (SQLParser. tokens)
-        ctx  (.sql parser)
-        walker (ParseTreeWalker.)
-        my-listener (make-listener)]
-    (.walk walker my-listener ctx)
-    @results))
+  (try
+    (let [lexer (SQLLexer. (ANTLRInputStream. s))
+          tokens (CommonTokenStream. lexer)
+          error-strategy (BailErrorStrategy. )
+          parser (doto (SQLParser. tokens) (.setErrorHandler error-strategy))
+          ctx  (.sql parser)
+          walker (ParseTreeWalker.)
+          my-listener (make-listener)]
+      (.walk walker my-listener ctx)
+      @results)
+    (catch ParseCancellationException ex
+      (println (str "Error parsing \"" s "\"")))))
