@@ -1348,6 +1348,7 @@ null_ordering
 insert_statement
   : INSERT (OVERWRITE)? INTO table_name (LEFT_PAREN column_name_list RIGHT_PAREN)? query_expression
   | INSERT (OVERWRITE)? INTO LOCATION path=Character_String_Literal (USING file_type=identifier (param_clause)?)? query_expression
+  | INSERT (OVERWRITE)? INTO table_name (LEFT_PAREN column_name_list RIGHT_PAREN)? VALUES insert_value_list
   ;
 
 /*
@@ -1359,4 +1360,24 @@ insert_statement
 
 update_statement
   : UPDATE table_reference_list SET search_condition (where_clause)?
+  ;
+
+/*
+===============================================================================
+  15.2 <truly general literal>
+       because the general literal doesn't accept numerics
+===============================================================================
+*/
+
+truly_general_literal
+  : signed_numerical_literal
+  | unsigned_literal
+  ;
+
+insert_value_list
+  : insert_value (COMMA insert_value)*
+  ;
+
+insert_value
+  : LEFT_PAREN truly_general_literal (COMMA truly_general_literal)* RIGHT_PAREN
   ;

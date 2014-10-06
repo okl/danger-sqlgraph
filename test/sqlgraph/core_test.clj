@@ -16,7 +16,11 @@
 
 (deftest insert-parse-test
   (is (= (parse-expr "insert into schema.mytable (a, b, c) select A, B, C from schema.mytable_old")
-         {:produces [] :consumes ["schema.mytable" "schema.mytable_old"] :destroys []})))
+         {:produces [] :consumes ["schema.mytable" "schema.mytable_old"] :destroys []}))
+  (is (= (parse-expr "insert into schema.mytable VALUES (10);")
+         {:produces [] :consumes["schema.mytable"] :destroys []}))
+  (is (= (parse-expr "insert into schema.mytable VALUES (10), (20);")
+         {:produces [] :consumes["schema.mytable"] :destroys []})))
 
 (deftest drop-parse-test
   (is (= (parse-expr "drop table myschema.mytable")
