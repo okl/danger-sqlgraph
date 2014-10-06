@@ -15,7 +15,5 @@
          {:produces ["schema.mytable"] :consumes ["schema.mytable_old"]})))
 
 (deftest insert-parse-test
-  (is (= (parse-expr "insert into schema.mytable (a, b, c) VALUES (1, 2, 3)")
-         {:produces [] :consumes ["schema.mytable"]}))
   (is (= (parse-expr "insert into schema.mytable (a, b, c) select A, B, C from schema.mytable_old")
          {:produces [] :consumes ["schema.mytable" "schema.mytable_old"]})))
