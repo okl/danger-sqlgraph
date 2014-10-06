@@ -169,7 +169,7 @@ partition_name
 */
 
 drop_table_statement
-  : DROP TABLE table_name (PURGE)?
+  : DROP TABLE (IF EXISTS)? table_name (PURGE)?
   ;
 
 /*

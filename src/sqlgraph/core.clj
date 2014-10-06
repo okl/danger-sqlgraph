@@ -17,7 +17,7 @@
             SQLParser$SqlContext
             SQLParserBaseListener]))
 
-(def results (atom {:produces [] :consumes []}))
+(def results (atom {}))
 (def state (atom nil))
 
 (defn- add-table [table-name]
@@ -25,6 +25,7 @@
                "query" :consumes
                "insert" :consumes
                "create" :produces
+               "drop" :destroys
                (throw (IllegalStateException.
                        (str "Unknown state " (first @state)))))
         lower-table (lower-case table-name)]
@@ -42,7 +43,7 @@
 
 
 (defn- make-listener []
-  (swap! results (fn [a] {:produces [] :consumes []}))
+  (swap! results (fn [a] {:produces [] :consumes [] :destroys []}))
   (swap! state (fn [a] nil))
   (proxy [okl.sqlgraph.SQLParserBaseListener] []
     (enterCreate_table_statement [^SQLParser$SqlContext ctx]
@@ -57,6 +58,10 @@
       (enter-state "insert"))
     (exitInsert_statement [^SQLParser$SqlContext ctx]
       (exit-state "insert"))
+    (enterDrop_table_statement [^SQLParser$SqlContext ctx]
+      (enter-state "drop"))
+    (exitDrop_table_statement [^SQLParser$SqlContext ctx]
+      (exit-state "drop"))
     (enterTable_name [^SQLParser$SqlContext ctx]
       (add-table (.getText ctx)))))
 
