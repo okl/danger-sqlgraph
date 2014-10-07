@@ -417,7 +417,7 @@ Identifier
 
 fragment
 Regular_Identifier
-  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|Digit|'_')*
+  : ('a'..'z'|'A'..'Z'|'_'|Digit) ('a'..'z'|'A'..'Z'|Digit|'_')*
   ;
 
 /*

@@ -6,6 +6,8 @@
   (is (= (parse-expr "SELECT * from MY_TABLE")
          {:produces [] :consumes ["my_table"] :destroys []}))
   (is (= (parse-expr "select * from my_table")
+         {:produces [] :consumes ["my_table"] :destroys []}))
+  (is (= (parse-expr "SELECT blah as 89_foo from MY_TABLE")
          {:produces [] :consumes ["my_table"] :destroys []})))
 
 (deftest create-parse-test
@@ -13,6 +15,7 @@
          {:produces ["schema.mytable"] :consumes [] :destroys []}))
   (is (= (parse-expr "create table schema.mytable as select * from schema.mytable_old")
          {:produces ["schema.mytable"] :consumes ["schema.mytable_old"] :destroys []})))
+
 
 (deftest insert-parse-test
   (is (= (parse-expr "insert into schema.mytable (a, b, c) select A, B, C from schema.mytable_old")
