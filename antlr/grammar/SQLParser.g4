@@ -324,6 +324,7 @@ datetime_literal
   : timestamp_literal
   | time_literal
   | date_literal
+  | interval_literal
   ;
 
 time_literal
@@ -336,6 +337,10 @@ timestamp_literal
 
 date_literal
   : DATE date_string=Character_String_Literal
+  ;
+
+interval_literal
+  : INTERVAL term primary_datetime_field
   ;
 
 boolean_literal
