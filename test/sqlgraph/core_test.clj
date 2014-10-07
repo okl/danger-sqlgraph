@@ -10,7 +10,8 @@
   (is (= (parse-expr "SELECT blah as 89_foo from MY_TABLE")
          {:produces [] :consumes ["my_table"] :destroys []}))
   (is (= (parse-expr "SELECT now() - interval 1 day")
-         {:produces [] :consumes [] :destroys []})))
+         {:produces [] :consumes [] :destroys []}))
+  (is (parse-expr "SELECT foo as 'bar bar'")))
 
 (deftest create-parse-test
   (is (= (parse-expr "create table schema.mytable (a int, b int, c varchar(20))")

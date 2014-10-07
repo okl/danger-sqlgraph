@@ -1081,6 +1081,7 @@ column_reference
 
 as_clause
   : (AS)? identifier
+  | AS Character_String_Literal
   ;
 
 column_reference_list
