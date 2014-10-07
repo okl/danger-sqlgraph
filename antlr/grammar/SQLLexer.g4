@@ -115,8 +115,10 @@ fragment Z
 ===============================================================================
 */
 
+ADD : A D D;
 AS : A S;
 ALL : A L L;
+ALTER : A L T E R;
 AND : A N D;
 ANY : A N Y;
 ASYMMETRIC : A S Y M M E T R I C;
@@ -234,6 +236,8 @@ INTERSECTION : I N T E R S E C T I O N;
 ISODOW : I S O D O W;
 ISOYEAR : I S O Y E A R;
 
+KEY : K E Y;
+
 LAST : L A S T;
 LESS : L E S S;
 LIST : L I S T;
@@ -256,6 +260,7 @@ OVERWRITE : O V E R W R I T E;
 PARTITION : P A R T I T I O N;
 PARTITIONS : P A R T I T I O N S;
 PRECISION : P R E C I S I O N;
+PRIMARY : P R I M A R Y;
 PURGE : P U R G E;
 
 QUARTER : Q U A R T E R;

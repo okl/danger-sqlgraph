@@ -33,3 +33,7 @@
          {:produces [] :consumes ["analytics.yoda"] :destroys []}))
   (is (= (parse-expr "update analytics.yoda y, foo.bar f set y.thingy = f.thingy where f.id = y.id")
          {:produces [] :consumes ["analytics.yoda" "foo.bar"] :destroys []})))
+
+(deftest alter-table-test
+  (is (= (parse-expr "alter table myschema.mytable add primary key (mycol1, mycol2);")
+         {:produces [] :consumes ["myschema.mytable"] :destroys []})))

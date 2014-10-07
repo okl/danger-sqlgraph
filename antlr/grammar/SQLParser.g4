@@ -44,6 +44,7 @@ statement
   | data_change_statement
   | schema_statement
   | index_statement
+  | alter_table_statement
   ;
 
 data_statement
@@ -1380,4 +1381,22 @@ insert_value_list
 
 insert_value
   : LEFT_PAREN truly_general_literal (COMMA truly_general_literal)* RIGHT_PAREN
+  ;
+
+/*
+===============================================================================
+  15.3 <alter table statement>
+===============================================================================
+*/
+
+alter_table_statement
+  : ALTER TABLE table_name alter_command
+  ;
+
+alter_command
+  : add_primary_key
+  ;
+
+add_primary_key
+  : ADD PRIMARY KEY LEFT_PAREN column_reference_list RIGHT_PAREN
   ;

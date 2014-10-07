@@ -27,6 +27,7 @@
                "create" :produces
                "drop" :destroys
                "update" :consumes
+               "alter" :consumes
                (throw (IllegalStateException.
                        (str "Unknown state " (first @state)))))
         lower-table (lower-case table-name)]
@@ -67,6 +68,10 @@
       (enter-state "update"))
     (exitUpdate_statement [^SQLParser$SqlContext ctx]
       (exit-state "update"))
+    (enterAlter_table_statement [^SQLParser$SqlContext ctx]
+      (enter-state "alter"))
+    (exitAlter_table_statement [^SQLParser$SqlContext ctx]
+      (exit-state "alter"))
     (enterTable_name [^SQLParser$SqlContext ctx]
       (add-table (.getText ctx)))))
 
