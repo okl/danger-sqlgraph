@@ -87,4 +87,5 @@
       (.walk walker my-listener ctx)
       @results)
     (catch ParseCancellationException ex
-      (println (str "Error parsing \"" s "\"")))))
+      (binding [*out* *err*]
+        (println (str "Error parsing \"" s "\""))))))
