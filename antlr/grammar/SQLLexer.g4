@@ -268,6 +268,7 @@ QUARTER : Q U A R T E R;
 
 RANGE : R A N G E;
 REGEXP : R E G E X P;
+RENAME : R E N A M E;
 RLIKE : R L I K E;
 ROLLUP : R O L L U P;
 

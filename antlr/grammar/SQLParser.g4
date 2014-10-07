@@ -45,6 +45,7 @@ statement
   | schema_statement
   | index_statement
   | alter_table_statement
+  | rename_table_statement
   ;
 
 data_statement
@@ -1404,4 +1405,22 @@ alter_command
 
 add_primary_key
   : ADD PRIMARY KEY LEFT_PAREN column_reference_list RIGHT_PAREN
+  ;
+
+/*
+===============================================================================
+  15.4 <rename table statement>
+===============================================================================
+*/
+
+rename_table_statement
+  : RENAME TABLE from_table_name TO to_table_name
+  ;
+
+from_table_name
+  : table_name
+  ;
+
+to_table_name
+  : table_name
   ;

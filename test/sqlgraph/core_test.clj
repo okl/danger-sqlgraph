@@ -42,3 +42,7 @@
 (deftest alter-table-test
   (is (= (parse-expr "alter table myschema.mytable add primary key (mycol1, mycol2);")
          {:produces [] :consumes ["myschema.mytable"] :destroys []})))
+
+(deftest rename-parse-test
+  (is (= (parse-expr "RENAME TABLE ms.mt TO ms2.mt2")
+         {:produces ["ms2.mt2"] :consumes ["ms.mt"] :destroys []})))
