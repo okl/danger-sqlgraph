@@ -86,16 +86,17 @@
       (add-table (.getText ctx)))))
 
 (defn parse-expr [s]
-  (try
-    (let [lexer (SQLLexer. (ANTLRInputStream. s))
-          tokens (CommonTokenStream. lexer)
-          error-strategy (BailErrorStrategy. )
-          parser (doto (SQLParser. tokens) (.setErrorHandler error-strategy))
-          ctx  (.sql parser)
-          walker (ParseTreeWalker.)
-          my-listener (make-listener)]
-      (.walk walker my-listener ctx)
-      @results)
-    (catch ParseCancellationException ex
-      (binding [*out* *err*]
-        (println (str "Error parsing \"" s "\""))))))
+  (if (not (= s ";"))
+    (try
+      (let [lexer (SQLLexer. (ANTLRInputStream. s))
+            tokens (CommonTokenStream. lexer)
+            error-strategy (BailErrorStrategy. )
+            parser (doto (SQLParser. tokens) (.setErrorHandler error-strategy))
+            ctx  (.sql parser)
+            walker (ParseTreeWalker.)
+            my-listener (make-listener)]
+        (.walk walker my-listener ctx)
+        @results)
+      (catch ParseCancellationException ex
+        (binding [*out* *err*]
+          (println (str "Error parsing \"" s "\"")))))))

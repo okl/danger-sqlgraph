@@ -47,3 +47,7 @@
 (deftest rename-parse-test
   (is (= (parse-expr "RENAME TABLE ms.mt TO ms2.mt2")
          {:produces ["ms2.mt2"] :consumes ["ms.mt"] :destroys []})))
+
+(deftest do-nothing-parse-test
+  (is (= (parse-expr ";")
+         nil)))
