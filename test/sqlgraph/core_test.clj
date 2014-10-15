@@ -13,7 +13,8 @@
          {:produces [] :consumes [] :destroys []}))
   (is (parse-expr "SELECT foo as 'bar bar'"))
   (is (parse-expr "SELECT foo 'bar bar'"))
-  (is (parse-expr "select 1 # this is a comment")))
+  (is (parse-expr "select 1 # this is a comment"))
+  (is (parse-expr "select * from atable join othertable where 1 = 1")))
 
 (deftest create-parse-test
   (is (= (parse-expr "create table schema.mytable (a int, b int, c varchar(20))")
