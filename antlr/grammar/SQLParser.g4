@@ -235,6 +235,7 @@ nonreserved_keywords
   | MONTH
   | NATIONAL
   | NULLIF
+  | ORDER
   | OVERWRITE
   | PARTITION
   | PARTITIONS
