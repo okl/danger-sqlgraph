@@ -443,6 +443,7 @@ boolean_type
 
 datetime_type
   : DATE
+  | DATETIME
   | TIME
   | TIME WITH TIME ZONE
   | TIMETZ
