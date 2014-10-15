@@ -40,7 +40,9 @@
   (is (= (parse-expr "update analytics.yoda y set y.id = y.blah")
          {:produces [] :consumes ["analytics.yoda"] :destroys []}))
   (is (= (parse-expr "update analytics.yoda y, foo.bar f set y.thingy = f.thingy where f.id = y.id")
-         {:produces [] :consumes ["analytics.yoda" "foo.bar"] :destroys []})))
+         {:produces [] :consumes ["analytics.yoda" "foo.bar"] :destroys []}))
+  (is (= (parse-expr "update table_name t1 join table_name2 t2 on t1.id = t2.id set t1.thingy = t2.thingy, t1.otherthingy = t2.otherthingy")
+         {:produces [] :consumes ["table_name" "table_name2"] :destroys []})))
 
 (deftest alter-table-test
   (is (= (parse-expr "alter table myschema.mytable add primary key (mycol1, mycol2);")

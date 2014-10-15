@@ -1372,7 +1372,7 @@ insert_statement
 */
 
 update_statement
-  : UPDATE table_reference_list SET search_condition (where_clause)?
+  : UPDATE table_reference_list SET search_condition (COMMA search_condition)* (where_clause)?
   ;
 
 /*
