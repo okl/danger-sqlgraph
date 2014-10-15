@@ -1308,6 +1308,7 @@ routine_invocation
 function_names_for_reserved_words
   : LEFT
   | RIGHT
+  | IF
   ;
 
 function_name
