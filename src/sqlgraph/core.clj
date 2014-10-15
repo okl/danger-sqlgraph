@@ -31,6 +31,7 @@
                "rename from" :consumes
                "rename to" :produces
                "index" :consumes
+               "truncate" :consumes
                (throw (IllegalStateException.
                        (str "Unknown state " (first @state)))))
         lower-table (lower-case table-name)]
@@ -87,6 +88,10 @@
       (enter-state "index"))
     (exitIndex_statement [^SQLParser$SqlContext ctx]
       (exit-state "index"))
+    (enterTruncate_table_statement [^SQLParser$SqlContext ctx]
+      (enter-state "truncate"))
+    (exitTruncate_table_statement [^SQLParser$SqlContext ctx]
+      (exit-state "truncate"))
     (enterTable_name [^SQLParser$SqlContext ctx]
       (add-table (.getText ctx)))))
 

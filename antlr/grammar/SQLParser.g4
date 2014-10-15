@@ -46,6 +46,7 @@ statement
   | index_statement
   | alter_table_statement
   | rename_table_statement
+  | truncate_table_statement
   ;
 
 data_statement
@@ -1464,4 +1465,14 @@ on_duplicate_key
 field_modifier
   : PRIMARY KEY
   | AUTO_INCREMENT
+  ;
+
+/*
+===============================================================================
+  15.7 <truncate table statement>
+===============================================================================
+*/
+
+truncate_table_statement
+  : TRUNCATE TABLE table_name
   ;

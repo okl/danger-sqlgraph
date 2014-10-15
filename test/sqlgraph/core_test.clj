@@ -55,3 +55,7 @@
 (deftest do-nothing-parse-test
   (is (= (parse-expr ";")
          nil)))
+
+(deftest truncate-table-test
+  (is (= (parse-expr "truncate table ms.mt")
+         {:produces [] :consumes ["ms.mt"] :destroys []})))

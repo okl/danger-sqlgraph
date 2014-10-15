@@ -178,6 +178,7 @@ TABLE : T A B L E;
 THEN : T H E N;
 TRAILING : T R A I L I N G;
 TRUE : T R U E;
+TRUNCATE : T R U N C A T E;
 
 UNION : U N I O N;
 UNIQUE : U N I Q U E;
