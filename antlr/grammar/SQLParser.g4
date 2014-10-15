@@ -37,6 +37,7 @@ package okl.sqlgraph;
 */
 sql
   : statement (SEMI_COLON)? EOF
+  | EOF
   ;
 
 statement
