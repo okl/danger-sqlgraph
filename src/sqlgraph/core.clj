@@ -97,6 +97,7 @@
             my-listener (make-listener)]
         (.walk walker my-listener ctx)
         @results)
-      (catch ParseCancellationException ex
+      (catch Exception ex
         (binding [*out* *err*]
-          (println (str "Error parsing \"" s "\"")))))))
+          (println (str "Error parsing \"" s "\""))
+          (println (.getMessage ex)))))))
