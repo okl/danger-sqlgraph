@@ -1402,15 +1402,20 @@ insert_value
 */
 
 alter_table_statement
-  : ALTER TABLE table_name alter_command
+  : ALTER TABLE table_name alter_command (COMMA alter_command)*
   ;
 
 alter_command
   : add_primary_key
+  | add_index
   ;
 
 add_primary_key
   : ADD PRIMARY KEY LEFT_PAREN column_reference_list RIGHT_PAREN
+  ;
+
+add_index
+  : ADD INDEX identifier LEFT_PAREN column_reference_list RIGHT_PAREN
   ;
 
 /*
