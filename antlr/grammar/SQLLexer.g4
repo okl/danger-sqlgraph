@@ -392,6 +392,7 @@ UNDERLINE : '_';
 VERTICAL_BAR : '|';
 QUOTE : '\'';
 DOUBLE_QUOTE : '"';
+BACKQUOTE : '`';
 
 NUMBER : Digit+;
 
@@ -424,11 +425,17 @@ LineComment2
 
 Identifier
   : Regular_Identifier
+  | Quoted_Identifier
   ;
 
 fragment
 Regular_Identifier
   : ('a'..'z'|'A'..'Z'|'_'|Digit) ('a'..'z'|'A'..'Z'|Digit|'_')*
+  ;
+
+fragment
+Quoted_Identifier
+  : '`' ~[`]* '`'
   ;
 
 /*

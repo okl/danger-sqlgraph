@@ -14,7 +14,8 @@
   (is (parse-expr "SELECT foo as 'bar bar'"))
   (is (parse-expr "SELECT foo 'bar bar'"))
   (is (parse-expr "select 1 # this is a comment"))
-  (is (parse-expr "select * from atable join othertable where 1 = 1")))
+  (is (parse-expr "select * from atable join othertable where 1 = 1"))
+  (is (parse-expr "select a.`some col` from sometable a")))
 
 (deftest create-parse-test
   (is (= (parse-expr "create table schema.mytable (a int, b int, c varchar(20))")
@@ -46,7 +47,8 @@
   (is (= (parse-expr "update analytics.yoda y, foo.bar f set y.thingy = f.thingy where f.id = y.id")
          {:produces [] :consumes ["analytics.yoda" "foo.bar"] :destroys []}))
   (is (= (parse-expr "update table_name t1 join table_name2 t2 on t1.id = t2.id set t1.thingy = t2.thingy, t1.otherthingy = t2.otherthingy")
-         {:produces [] :consumes ["table_name" "table_name2"] :destroys []})))
+         {:produces [] :consumes ["table_name" "table_name2"] :destroys []}))
+  (is (parse-expr "update table_name t set t.`some colOHBS*%*` = 15")))
 
 (deftest alter-table-test
   (is (= (parse-expr "alter table myschema.mytable add primary key (mycol1, mycol2);")
