@@ -27,7 +27,8 @@
   (is (= (parse-expr "insert into schema.mytable VALUES (10);")
          {:produces [] :consumes["schema.mytable"] :destroys []}))
   (is (= (parse-expr "insert into schema.mytable VALUES (10), (20);")
-         {:produces [] :consumes["schema.mytable"] :destroys []})))
+         {:produces [] :consumes["schema.mytable"] :destroys []}))
+  (is (parse-expr "insert into schema.mytable (col1, col2) select 1, 2 on duplicate key update col1 = col1 + 1;")))
 
 (deftest drop-parse-test
   (is (= (parse-expr "drop table myschema.mytable")

@@ -1355,9 +1355,9 @@ null_ordering
 */
 
 insert_statement
-  : INSERT (OVERWRITE)? INTO table_name (LEFT_PAREN column_name_list RIGHT_PAREN)? query_expression
-  | INSERT (OVERWRITE)? INTO LOCATION path=Character_String_Literal (USING file_type=identifier (param_clause)?)? query_expression
-  | INSERT (OVERWRITE)? INTO table_name (LEFT_PAREN column_name_list RIGHT_PAREN)? VALUES insert_value_list
+  : INSERT (OVERWRITE)? INTO table_name (LEFT_PAREN column_name_list RIGHT_PAREN)? query_expression (on_duplicate_key)?
+  | INSERT (OVERWRITE)? INTO LOCATION path=Character_String_Literal (USING file_type=identifier (param_clause)?)? query_expression (on_duplicate_key)?
+  | INSERT (OVERWRITE)? INTO table_name (LEFT_PAREN column_name_list RIGHT_PAREN)? VALUES insert_value_list (on_duplicate_key)?
   ;
 
 /*
@@ -1425,4 +1425,14 @@ from_table_name
 
 to_table_name
   : table_name
+  ;
+
+/*
+===============================================================================
+  15.5 <on duplicate key>
+===============================================================================
+*/
+
+on_duplicate_key
+  : ON DUPLICATE KEY UPDATE search_condition (COMMA search_condition)*
   ;

@@ -211,6 +211,7 @@ DECADE : D E C A D E;
 DOW : D O W;
 DOY : D O Y;
 DROP : D R O P;
+DUPLICATE : D U P L I C A T E;
 
 EPOCH : E P O C H;
 EVERY : E V E R Y;
