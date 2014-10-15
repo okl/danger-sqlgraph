@@ -1425,7 +1425,7 @@ add_named_key
   ;
 
 add_index
-  : ADD INDEX identifier LEFT_PAREN column_reference_list RIGHT_PAREN
+  : ADD (UNIQUE)? INDEX identifier LEFT_PAREN column_reference_list RIGHT_PAREN
   ;
 
 /*
