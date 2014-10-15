@@ -1406,12 +1406,21 @@ alter_table_statement
   ;
 
 alter_command
-  : add_primary_key
+  : add_key
   | add_index
+  ;
+
+add_key
+  : add_primary_key
+  | add_named_key
   ;
 
 add_primary_key
   : ADD PRIMARY KEY LEFT_PAREN column_reference_list RIGHT_PAREN
+  ;
+
+add_named_key
+  : ADD KEY identifier LEFT_PAREN column_reference_list RIGHT_PAREN
   ;
 
 add_index
