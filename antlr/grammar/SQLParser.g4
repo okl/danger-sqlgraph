@@ -81,7 +81,7 @@ table_elements
   ;
 
 field_element
-  : name=identifier field_type
+  : name=identifier field_type (field_modifier)?
   | PRIMARY KEY LEFT_PAREN identifier (COMMA identifier)* RIGHT_PAREN
   | INDEX LEFT_PAREN identifier (COMMA identifier)* RIGHT_PAREN
   ;
@@ -1453,4 +1453,15 @@ to_table_name
 
 on_duplicate_key
   : ON DUPLICATE KEY UPDATE search_condition (COMMA search_condition)*
+  ;
+
+/*
+===============================================================================
+  15.6 <field modifier>
+===============================================================================
+*/
+
+field_modifier
+  : PRIMARY KEY
+  | AUTO_INCREMENT
   ;
