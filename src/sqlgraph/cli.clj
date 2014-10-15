@@ -25,7 +25,9 @@
 (defn- process-file [file-contents]
   "Process each statement of the file separately"
   ; delete out comments
-  (let [file-contents (string/replace file-contents #"(?s)/\*.*\*/" "")]
+  (let [file-contents (string/replace file-contents #"(?s)/\*.*\*/" "")
+        file-contents (string/replace file-contents #"(?m)--.*$" "")
+        file-contents (string/replace file-contents #"(?m)#.*$" "")]
     (doall (map process-stmt (butlast (string/split file-contents #";"))))))
 
 (defn -main [& args]
