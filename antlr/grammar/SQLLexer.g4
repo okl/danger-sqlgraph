@@ -136,6 +136,7 @@ DESC : D E S C;
 DISTINCT : D I S T I N C T;
 
 END : E N D;
+ENGINE : E N G I N E;
 ELSE : E L S E;
 EXCEPT : E X C E P T;
 

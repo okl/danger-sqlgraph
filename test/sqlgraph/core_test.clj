@@ -18,7 +18,9 @@
   (is (= (parse-expr "create table schema.mytable (a int, b int, c varchar(20))")
          {:produces ["schema.mytable"] :consumes [] :destroys []}))
   (is (= (parse-expr "create table schema.mytable as select * from schema.mytable_old")
-         {:produces ["schema.mytable"] :consumes ["schema.mytable_old"] :destroys []})))
+         {:produces ["schema.mytable"] :consumes ["schema.mytable_old"] :destroys []}))
+  (is (= (parse-expr "create table ms.mt (a int) engine=innodb")
+         {:produces ["ms.mt"] :consumes [] :destroys []})))
 
 
 (deftest insert-parse-test

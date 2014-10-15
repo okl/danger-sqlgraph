@@ -71,9 +71,9 @@ index_statement
 create_table_statement
   : CREATE EXTERNAL TABLE table_name table_elements USING file_type=identifier
     (param_clause)? (table_partitioning_clauses)? (LOCATION path=Character_String_Literal)
-  | CREATE TABLE table_name table_elements (USING file_type=identifier)?
+  | CREATE TABLE table_name table_elements (ENGINE EQUAL identifier)?
     (param_clause)? (table_partitioning_clauses)? (AS query_expression)?
-  | CREATE TABLE table_name (USING file_type=identifier)?
+  | CREATE TABLE table_name (ENGINE EQUAL identifier)?
     (param_clause)? (table_partitioning_clauses)? AS query_expression
   ;
 
