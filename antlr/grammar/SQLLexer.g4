@@ -148,6 +148,7 @@ GROUP : G R O U P;
 
 HAVING : H A V I N G;
 
+IGNORE : I G N O R E;
 ILIKE : I L I K E;
 IN : I N;
 INNER : I N N E R;
