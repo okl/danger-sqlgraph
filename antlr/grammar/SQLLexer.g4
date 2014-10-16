@@ -188,6 +188,8 @@ UNIQUE : U N I Q U E;
 UPDATE : U P D A T E;
 USING : U S I N G;
 
+VIEW : V I E W;
+
 WHEN : W H E N;
 WHERE : W H E R E;
 WITH : W I T H;

@@ -63,6 +63,8 @@ data_change_statement
 schema_statement
   : create_table_statement
   | drop_table_statement
+  | create_view_statement
+  | drop_view_statement
   ;
 
 index_statement
@@ -1492,4 +1494,18 @@ truncate_table_statement
 
 delete_statement
   : DELETE FROM table_reference_list (WHERE search_condition (COMMA search_condition)*)?
+  ;
+
+/*
+===============================================================================
+  15.7 <views>
+===============================================================================
+*/
+
+create_view_statement
+  : CREATE VIEW table_name AS query_expression
+  ;
+
+drop_view_statement
+  : DROP VIEW (IF EXISTS)? table_name
   ;

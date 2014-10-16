@@ -97,6 +97,14 @@
       (enter-state "delete"))
     (exitDelete_statement [^SQLParser$SqlContext ctx]
       (exit-state "delete"))
+    (enterCreate_view_statement [^SQLParser$SqlContext ctx]
+      (enter-state "create"))
+    (exitCreate_view_statement [^SQLParser$SqlContext ctx]
+      (exit-state "create"))
+    (enterDrop_view_statement [^SQLParser$SqlContext ctx]
+      (enter-state "drop"))
+    (exitDrop_view_statement [^SQLParser$SqlContext ctx]
+      (exit-state "drop"))
     (enterTable_name [^SQLParser$SqlContext ctx]
       (add-table (.getText ctx)))))
 

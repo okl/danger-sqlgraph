@@ -76,3 +76,9 @@
 (deftest nothing-test
   (is (= (parse-expr "")
          {:produces [] :consumes [] :destroys []})))
+
+(deftest view-test
+  (is (= (parse-expr "CREATE VIEW ms.mv as select * from something")
+         {:produces ["ms.mv"] :consumes ["something"] :destroys []}))
+  (is (= (parse-expr "DROP VIEW if exists ms.mv")
+         {:produces [] :consumes [] :destroys ["ms.mv"]})))
