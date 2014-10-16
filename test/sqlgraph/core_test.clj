@@ -85,3 +85,7 @@
          {:produces ["ms.mv"] :consumes ["something"] :destroys []}))
   (is (= (parse-expr "DROP VIEW if exists ms.mv")
          {:produces [] :consumes [] :destroys ["ms.mv"]})))
+
+(deftest create-index-test
+  (is (= (parse-expr "CREATE INDEX idx ON ms.mt (col1, col2) using btree")
+         {:produces [] :consumes ["ms.mt"] :destroys[]})))

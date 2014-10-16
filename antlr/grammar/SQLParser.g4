@@ -69,7 +69,7 @@ schema_statement
 
 index_statement
   : CREATE (u=UNIQUE)? INDEX n=identifier ON t=table_name (m=method_specifier)?
-    LEFT_PAREN s=sort_specifier_list RIGHT_PAREN p=param_clause?
+    LEFT_PAREN s=sort_specifier_list RIGHT_PAREN p=param_clause? (USING BTREE)?
   ;
 
 create_table_statement
@@ -1489,7 +1489,7 @@ truncate_table_statement
 
 /*
 ===============================================================================
-  15.7 <delete statement>
+  15.8 <delete statement>
 ===============================================================================
 */
 
@@ -1499,7 +1499,7 @@ delete_statement
 
 /*
 ===============================================================================
-  15.7 <views>
+  15.9 <views>
 ===============================================================================
 */
 
@@ -1510,3 +1510,4 @@ create_view_statement
 drop_view_statement
   : DROP VIEW (IF EXISTS)? table_name
   ;
+

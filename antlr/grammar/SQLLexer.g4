@@ -202,6 +202,7 @@ WITH : W I T H;
 AVG : A V G;
 
 BETWEEN : B E T W E E N;
+BTREE : B T R E E;
 BY : B Y;
 
 CENTURY : C E N T U R Y;
