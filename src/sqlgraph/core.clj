@@ -1,5 +1,6 @@
 (ns sqlgraph.core
-  (:require [clojure.string :refer [lower-case]])
+  (:require [clojure.string :refer [lower-case]]
+            [clojure.set :refer [union]])
   (:import [org.antlr.v4.runtime ANTLRFileStream]
            [org.antlr.v4.runtime
             ANTLRInputStream
@@ -50,7 +51,7 @@
 
 
 (defn- make-listener []
-  (swap! results (fn [a] {:produces [] :consumes [] :destroys []}))
+  (swap! results (fn [a] {:produces #{} :consumes #{} :destroys #{}}))
   (swap! state (fn [a] nil))
   (proxy [okl.sqlgraph.SQLParserBaseListener] []
     (enterCreate_table_statement [^SQLParser$SqlContext ctx]
@@ -108,19 +109,27 @@
     (enterTable_name [^SQLParser$SqlContext ctx]
       (add-table (.getText ctx)))))
 
-(defn parse-expr [s]
-  (if (not (= s ";"))
-    (try
-      (let [lexer (SQLLexer. (ANTLRInputStream. s))
-            tokens (CommonTokenStream. lexer)
-            error-strategy (BailErrorStrategy. )
-            parser (doto (SQLParser. tokens) (.setErrorHandler error-strategy))
-            ctx  (.sql parser)
-            walker (ParseTreeWalker.)
-            my-listener (make-listener)]
-        (.walk walker my-listener ctx)
-        @results)
-      (catch Exception ex
-        (binding [*out* *err*]
-          (println (str "Error parsing \"" s "\""))
-          (println (.getMessage ex)))))))
+(defn parse-expr
+  ([s]
+     (if (not (= s ";"))
+       (try
+         (let [lexer (SQLLexer. (ANTLRInputStream. s))
+               tokens (CommonTokenStream. lexer)
+               error-strategy (BailErrorStrategy. )
+               parser (doto (SQLParser. tokens)
+                        (.setErrorHandler error-strategy))
+               ctx  (.sql parser)
+               walker (ParseTreeWalker.)
+               my-listener (make-listener)]
+           (.walk walker my-listener ctx)
+           @results)
+         (catch Exception ex
+           (binding [*out* *err*]
+             (println (str "Error parsing \"" s "\""))
+             (println (.getMessage ex)))))))
+  ([s & args]
+     (let [all-output (map parse-expr (concat [s] args))
+           produces (apply union (map :produces all-output))
+           consumes (apply union (map :consumes all-output))
+           destroys (apply union (map :destroys all-output))]
+       {:produces produces :consumes consumes :destroys destroys})))
