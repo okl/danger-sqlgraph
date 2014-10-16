@@ -875,7 +875,7 @@ joined_table
 
 joined_table_primary
   : CROSS JOIN right=table_primary
-  | (t=join_type)? JOIN right=table_primary (s=join_specification)?
+  | (t=join_type)? JOIN right=table_primary (use_index)? (s=join_specification)?
   | NATURAL (t=join_type)? JOIN right=table_primary
   | UNION JOIN right=table_primary
   ;
@@ -1511,3 +1511,12 @@ drop_view_statement
   : DROP VIEW (IF EXISTS)? table_name
   ;
 
+/*
+===============================================================================
+  15.10 <use_index>
+===============================================================================
+*/
+
+use_index
+  : USE INDEX LEFT_PAREN identifier (COMMA identifier)* RIGHT_PAREN
+  ;

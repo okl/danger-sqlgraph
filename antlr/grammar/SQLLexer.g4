@@ -186,6 +186,7 @@ TRUNCATE : T R U N C A T E;
 UNION : U N I O N;
 UNIQUE : U N I Q U E;
 UPDATE : U P D A T E;
+USE : U S E;
 USING : U S I N G;
 
 VIEW : V I E W;
