@@ -78,7 +78,7 @@ create_table_statement
   | CREATE TABLE table_name table_elements (ENGINE EQUAL identifier)?
     (param_clause)? (table_partitioning_clauses)? (AS query_expression)?
   | CREATE TABLE table_name (ENGINE EQUAL identifier)?
-    (param_clause)? (table_partitioning_clauses)? AS query_expression
+    (param_clause)? (table_partitioning_clauses)? (AS)? query_expression
   ;
 
 table_elements
