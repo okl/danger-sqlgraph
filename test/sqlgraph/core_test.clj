@@ -51,6 +51,10 @@
          {:produces [] :consumes ["table_name" "table_name2"] :destroys []}))
   (is (parse-expr "update table_name t set t.`some colOHBS*%*` = 15")))
 
+(deftest delete-parse-test
+  (is (= (parse-expr "delete from ms.mt where something = selse")
+         {:produces [] :consumes ["ms.mt"] :destroys []})))
+
 (deftest alter-table-test
   (is (= (parse-expr "alter table myschema.mytable add primary key (mycol1, mycol2);")
          {:produces [] :consumes ["myschema.mytable"] :destroys []}))

@@ -48,6 +48,7 @@ statement
   | alter_table_statement
   | rename_table_statement
   | truncate_table_statement
+  | delete_statement
   ;
 
 data_statement
@@ -1481,4 +1482,14 @@ field_modifier
 
 truncate_table_statement
   : TRUNCATE TABLE table_name
+  ;
+
+/*
+===============================================================================
+  15.7 <delete statement>
+===============================================================================
+*/
+
+delete_statement
+  : DELETE FROM table_reference_list (WHERE search_condition (COMMA search_condition)*)?
   ;
