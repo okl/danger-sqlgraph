@@ -419,7 +419,7 @@ exact_numeric_type
   | DECIMAL (precision_param)?
   | DEC (precision_param)?
   | INT1
-  | TINYINT
+  | TINYINT type_length?
   | INT2
   | SMALLINT
   | INT4

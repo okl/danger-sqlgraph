@@ -26,7 +26,8 @@
   (is (= (parse-expr "create table ms.mt (a int) engine=innodb")
          {:produces ["ms.mt"] :consumes [] :destroys []}))
   (is (parse-expr "create table ms.mt select * from ms.mt2"))
-  (is (parse-expr "create table ms.mt (a int(11), b int, c int, primary key (a, b, c))")))
+  (is (parse-expr "create table ms.mt (a int(11), b int, c int, primary key (a, b, c))"))
+  (is (parse-expr "create table ms.mt (a tinyint(1))")))
 
 
 (deftest insert-parse-test
