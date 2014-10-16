@@ -15,7 +15,8 @@
   (is (parse-expr "SELECT foo 'bar bar'"))
   (is (parse-expr "select 1 # this is a comment"))
   (is (parse-expr "select * from atable join othertable where 1 = 1"))
-  (is (parse-expr "select a.`some col` from sometable a")))
+  (is (parse-expr "select a.`some col` from sometable a"))
+  (is (parse-expr "select case when id = @prev then @count := @count + 1 else @count := 1 and @prev := id end")))
 
 (deftest create-parse-test
   (is (= (parse-expr "create table schema.mytable (a int, b int, c varchar(20))")

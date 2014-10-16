@@ -1154,6 +1154,7 @@ comp_op
   | LEQ
   | GTH
   | GEQ
+  | ASSIGN
   ;
 
 /*
