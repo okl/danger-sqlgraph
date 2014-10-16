@@ -423,7 +423,7 @@ exact_numeric_type
   | INT2
   | SMALLINT
   | INT4
-  | INT
+  | INT type_length?
   | INTEGER
   | INT8
   | BIGINT
