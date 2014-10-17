@@ -1477,6 +1477,7 @@ field_modifier
   | AUTO_INCREMENT
   | DEFAULT value_expression
   | NOT NULL
+  | COMMENT value_expression
   ;
 
 /*

@@ -129,6 +129,7 @@ BOTH : B O T H;
 
 CASE : C A S E;
 CAST : C A S T;
+COMMENT: C O M M E N T;
 CREATE : C R E A T E;
 CROSS : C R O S S;
 
