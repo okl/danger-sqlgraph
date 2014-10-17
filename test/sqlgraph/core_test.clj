@@ -17,7 +17,9 @@
   (is (parse-expr "select * from atable join othertable where 1 = 1"))
   (is (parse-expr "select a.`some col` from sometable a"))
   (is (parse-expr "select case when id = @prev then @count := @count + 1 else @count := 1 and @prev := id end"))
-  (is (parse-expr "select * from ms.mt join ms.mt2 use index (idx) on mt.thing = mt2.thing2")))
+  (is (parse-expr "select * from ms.mt join ms.mt2 use index (idx) on mt.thing = mt2.thing2"))
+  (is (= (parse-expr "select * from mytab; select * from mytab2")
+         {:produces #{} :consumes #{"mytab" "mytab2"} :destroys #{}})))
 
 (deftest create-parse-test
   (is (= (parse-expr "create table schema.mytable (a int, b int, c varchar(20))")
