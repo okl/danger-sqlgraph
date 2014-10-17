@@ -444,6 +444,7 @@ Regular_Identifier
 fragment
 Quoted_Identifier
   : '`' ~[`]* '`'
+  | '"' ~["]* '"'
   ;
 
 /*
