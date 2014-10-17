@@ -132,6 +132,7 @@ CAST : C A S T;
 CREATE : C R E A T E;
 CROSS : C R O S S;
 
+DEFAULT : D E F A U L T;
 DELETE : D E L E T E;
 DESC : D E S C;
 DISTINCT : D I S T I N C T;

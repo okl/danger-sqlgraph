@@ -86,7 +86,7 @@ table_elements
   ;
 
 field_element
-  : name=identifier field_type (field_modifier)?
+  : name=identifier field_type (field_modifier)*
   | PRIMARY KEY LEFT_PAREN identifier (COMMA identifier)* RIGHT_PAREN
   | INDEX LEFT_PAREN identifier (COMMA identifier)* RIGHT_PAREN
   ;
@@ -1475,6 +1475,8 @@ on_duplicate_key
 field_modifier
   : PRIMARY KEY
   | AUTO_INCREMENT
+  | DEFAULT value_expression
+  | NOT NULL
   ;
 
 /*
