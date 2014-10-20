@@ -70,7 +70,9 @@
   (is (= (parse-expr "alter table myschema.mytable add primary key (mycol1, mycol2);")
          {:produces #{} :consumes #{"myschema.mytable"} :destroys #{}}))
   (is (= (parse-expr "alter table ms.mt add unique index idx(somecol)")
-         {:produces #{} :consumes #{"ms.mt"} :destroys #{}})))
+         {:produces #{} :consumes #{"ms.mt"} :destroys #{}}))
+  (is (parse-expr "alter table ms.mt modify foo varchar(200)"))
+  (is (parse-expr "alter table ms.mt add primary key fookey (foo)")))
 
 (deftest rename-parse-test
   (is (= (parse-expr "RENAME TABLE ms.mt TO ms2.mt2")
