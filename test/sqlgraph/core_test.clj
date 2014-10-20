@@ -20,7 +20,8 @@
   (is (parse-expr "select * from ms.mt join ms.mt2 use index (idx) on mt.thing = mt2.thing2"))
   (is (= (parse-expr "select * from mytab; select * from mytab2")
          {:produces #{} :consumes #{"mytab" "mytab2"} :destroys #{}}))
-  (is (parse-expr "select \"column\" as somehting")))
+  (is (parse-expr "select \"column\" as somehting"))
+  (is (parse-expr "select cast(a as signed), cast(b as unsigned) from ms.mt")))
 
 (deftest create-parse-test
   (is (= (parse-expr "create table schema.mytable (a int, b int, c varchar(20))")

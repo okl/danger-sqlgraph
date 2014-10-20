@@ -620,6 +620,7 @@ cast_operand
 
 cast_target
   : data_type
+  | signedness
   ;
 
 /*
@@ -1532,4 +1533,15 @@ replace_statement
   : REPLACE (duplicate_option)? INTO? table_name (LEFT_PAREN column_name_list RIGHT_PAREN)? query_expression (on_duplicate_key)?
   | REPLACE (duplicate_option)? INTO LOCATION path=Character_String_Literal (USING file_type=identifier (param_clause)?)? query_expression (on_duplicate_key)?
   | REPLACE (duplicate_option)? INTO table_name (LEFT_PAREN column_name_list RIGHT_PAREN)? VALUES insert_value_list (on_duplicate_key)?
+  ;
+
+/*
+===============================================================================
+  15.12 <signedness>
+===============================================================================
+*/
+
+signedness
+  : UNSIGNED
+  | SIGNED
   ;
