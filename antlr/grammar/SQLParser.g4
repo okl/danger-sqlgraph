@@ -50,6 +50,7 @@ statement
   | rename_table_statement
   | truncate_table_statement
   | delete_statement
+  | call_statement
   ;
 
 data_statement
@@ -1496,7 +1497,7 @@ truncate_table_statement
 */
 
 delete_statement
-  : DELETE FROM table_reference_list (WHERE search_condition (COMMA search_condition)*)?
+  : DELETE (select_list)? FROM table_reference_list (WHERE search_condition (COMMA search_condition)*)?
   ;
 
 /*
@@ -1544,4 +1545,14 @@ replace_statement
 signedness
   : UNSIGNED
   | SIGNED
+  ;
+
+/*
+===============================================================================
+  15.12 <call_statement>
+===============================================================================
+*/
+
+call_statement
+  : CALL (identifier DOT)? function_name LEFT_PAREN (identifier (COMMA identifier)*)? RIGHT_PAREN
   ;

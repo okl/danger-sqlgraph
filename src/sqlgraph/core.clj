@@ -35,6 +35,7 @@
                "truncate" :consumes
                "delete" :consumes
                "replace" :consumes
+               "call" :consumes
                (throw (IllegalStateException.
                        (str "Unknown state " (first @state)))))
         lower-table (lower-case table-name)]
@@ -111,6 +112,10 @@
       (enter-state "replace"))
     (exitReplace_statement [^SQLParser$SqlContext ctx]
       (exit-state "replace"))
+    (enterCall_statement [^SQLParser$SqlContext ctx]
+      (enter-state "call"))
+    (exitCall_statement [^SQLParser$SqlContext ctx]
+      (exit-state "call"))
     (enterTable_name [^SQLParser$SqlContext ctx]
       (add-table (.getText ctx)))))
 

@@ -66,7 +66,8 @@
 
 (deftest delete-parse-test
   (is (= (parse-expr "delete from ms.mt where something = selse")
-         {:produces #{} :consumes #{"ms.mt"} :destroys #{}})))
+         {:produces #{} :consumes #{"ms.mt"} :destroys #{}}))
+  (is (parse-expr "delete mt.* from ms.mt")))
 
 (deftest alter-table-test
   (is (= (parse-expr "alter table myschema.mytable add primary key (mycol1, mycol2);")
@@ -105,3 +106,6 @@
 (deftest replace-test
   (is (= (parse-expr "REPLACE INTO ms.mt select * from ms.mt2")
          {:produces #{} :consumes #{"ms.mt" "ms.mt2"} :destroys #{}})))
+(deftest call-test
+  (is (= (parse-expr "call something.myfn()")
+         {:produces #{} :consumes #{} :destroys #{}})))
