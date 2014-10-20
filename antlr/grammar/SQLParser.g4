@@ -1420,6 +1420,7 @@ alter_table_statement
 alter_command
   : add_key
   | add_index
+  | modify_column
   ;
 
 add_key
@@ -1437,6 +1438,10 @@ add_named_key
 
 add_index
   : ADD (UNIQUE)? INDEX identifier LEFT_PAREN column_reference_list RIGHT_PAREN
+  ;
+
+modify_column
+  : MODIFY field_element (COMMA field_element)*
   ;
 
 /*

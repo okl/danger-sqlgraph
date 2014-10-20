@@ -166,6 +166,8 @@ LEFT : L E F T;
 LIKE : L I K E;
 LIMIT : L I M I T;
 
+MODIFY : M O D I F Y;
+
 NATURAL : N A T U R A L;
 NOT : N O T;
 NULL : N U L L;
