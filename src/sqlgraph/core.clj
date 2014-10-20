@@ -34,6 +34,7 @@
                "index" :consumes
                "truncate" :consumes
                "delete" :consumes
+               "replace" :consumes
                (throw (IllegalStateException.
                        (str "Unknown state " (first @state)))))
         lower-table (lower-case table-name)]
@@ -106,6 +107,10 @@
       (enter-state "drop"))
     (exitDrop_view_statement [^SQLParser$SqlContext ctx]
       (exit-state "drop"))
+    (enterReplace_statement [^SQLParser$SqlContext ctx]
+      (enter-state "replace"))
+    (exitReplace_statement [^SQLParser$SqlContext ctx]
+      (exit-state "replace"))
     (enterTable_name [^SQLParser$SqlContext ctx]
       (add-table (.getText ctx)))))
 

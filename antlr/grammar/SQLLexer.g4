@@ -176,6 +176,7 @@ ON : O N;
 OUTER : O U T E R;
 OR : O R;
 ORDER : O R D E R;
+REPLACE : R E P L A C E;
 RIGHT : R I G H T;
 SELECT : S E L E C T;
 SOME : S O M E;

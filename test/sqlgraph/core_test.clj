@@ -99,3 +99,7 @@
 (deftest create-index-test
   (is (= (parse-expr "CREATE INDEX idx ON ms.mt (col1, col2) using btree")
          {:produces #{} :consumes #{"ms.mt"} :destroys #{}})))
+
+(deftest replace-test
+  (is (= (parse-expr "REPLACE INTO ms.mt select * from ms.mt2")
+         {:produces #{} :consumes #{"ms.mt" "ms.mt2"} :destroys #{}})))
