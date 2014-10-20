@@ -89,7 +89,7 @@ table_elements
 
 field_element
   : name=identifier field_type (field_modifier)*
-  | PRIMARY KEY LEFT_PAREN identifier (COMMA identifier)* RIGHT_PAREN
+  | (PRIMARY|UNIQUE) KEY LEFT_PAREN identifier (COMMA identifier)* RIGHT_PAREN
   | INDEX LEFT_PAREN identifier (COMMA identifier)* RIGHT_PAREN
   ;
 

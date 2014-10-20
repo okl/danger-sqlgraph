@@ -33,7 +33,8 @@
   (is (parse-expr "create table ms.mt (a int(11), b int, c int, primary key (a, b, c))"))
   (is (parse-expr "create table ms.mt (a tinyint(1))"))
   (is (parse-expr "create table ms.mt (a varchar(25) default null, b varchar(20) NOT NULL)"))
-  (is (parse-expr "create table ms.mt (a varchar(25) COMMENT 'this does some stuff')")))
+  (is (parse-expr "create table ms.mt (a varchar(25) COMMENT 'this does some stuff')"))
+  (is (parse-expr "create table ms.mt (a varchar(25), b int, unique key (a, b));")))
 
 
 (deftest insert-parse-test
